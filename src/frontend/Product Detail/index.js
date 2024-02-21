@@ -1,14 +1,51 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Container, Row, Col } from "react-bootstrap";
-import { Link } from "react-router-dom";
-import { Link as ScrollLink } from "react-scroll";
+import {
+  Link as ScrollLink,
+  Events,
+  animateScroll as scroll,
+  scrollSpy,
+} from "react-scroll";
 import { productImages } from "../../data/data";
 import Button from "../../components/common/buttton";
 import Accordion from "react-bootstrap/Accordion";
+import Title from "../../components/common/Title/title";
+import ProductCard from "../../components/common/Product Card";
+import { recommendationProducts } from "../../data/data";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { products } from "../../data/data";
+
+// Import Swiper styles
+import "swiper/css";
+import "swiper/css/free-mode";
+import "swiper/css/navigation";
+import "swiper/css/thumbs";
+
+// import required modules
+import { FreeMode, Navigation, Thumbs } from "swiper/modules";
 
 const ProductDetail = () => {
-  const [isActive, setIsActive] = useState(false);
+  const [activeLink, setActiveLink] = useState("");
   const [value, setValue] = useState(1);
+
+  // Initialize scroll spy
+  scrollSpy.update();
+  const [thumbsSwiper, setThumbsSwiper] = useState(null);
+
+  useEffect(() => {
+    Events.scrollEvent.register("begin", (to, element) => {
+      setActiveLink(to);
+    });
+
+    return () => {
+      Events.scrollEvent.remove("begin");
+    };
+  }, []);
+  const { currentSlug } = useParams();
+  const product = products.find((item) => item.slug === currentSlug);
+
   return (
     <>
       <Container>
@@ -18,13 +55,14 @@ const ProductDetail = () => {
               <Row>
                 <Col lg={2}>
                   <div className="product__thumbnails">
-                    {productImages.map((image, index) => (
+                    {product.images.map((image, index) => (
                       <ScrollLink
                         to={image.id}
-                        className={`product__side--nav-image ${
-                          isActive ? "active" : ""
-                        }`}
-                        onClick={() => setIsActive(!isActive)}
+                        className="product__side--nav-image"
+                        spy={true}
+                        smooth={true}
+                        duration={30}
+                        activeClass={activeLink === image.id ? "active" : ""}
                         key={index}
                       >
                         <img src={image.image} alt="" />
@@ -34,7 +72,7 @@ const ProductDetail = () => {
                 </Col>
                 <Col lg={10}>
                   <div className="product__gallery--stack">
-                    {productImages.map((image, index) => (
+                    {product.images.map((image, index) => (
                       <img
                         className="product__gallery--image"
                         id={image.id}
@@ -46,8 +84,42 @@ const ProductDetail = () => {
                   </div>
                 </Col>
               </Row>
+              <Row>
+                <Col lg={12}>
+                  <div className="swiper-product">
+                    <Swiper
+                      spaceBetween={10}
+                      navigation={true}
+                      thumbs={{ swiper: thumbsSwiper }}
+                      modules={[FreeMode, Navigation, Thumbs]}
+                      className="mySwiper2"
+                    >
+                      {product.images.map((image, index) => (
+                        <SwiperSlide key={index}>
+                          <img src={image.image} alt="" />
+                        </SwiperSlide>
+                      ))}
+                    </Swiper>
+                    <Swiper
+                      onSwiper={setThumbsSwiper}
+                      spaceBetween={10}
+                      slidesPerView={4}
+                      freeMode={true}
+                      watchSlidesProgress={true}
+                      modules={[FreeMode, Navigation, Thumbs]}
+                      className="mySwiper"
+                    >
+                      {product.images.map((image, index) => (
+                        <SwiperSlide key={index}>
+                          <img src={image.image} alt="" />
+                        </SwiperSlide>
+                      ))}
+                    </Swiper>
+                  </div>
+                </Col>
+              </Row>
               <div className="product__tabs">
-                <Accordion defaultActiveKey={["0"]} alwaysOpen>
+                <Accordion>
                   <Accordion.Item eventKey="0">
                     <Accordion.Header>Manufacturer Info</Accordion.Header>
                     <Accordion.Body>
@@ -71,8 +143,8 @@ const ProductDetail = () => {
             <Col lg={4}>
               <div className="product__info">
                 <div className="product__meta">
-                  <h1 className="product__title">ladies hand bag</h1>
-                  <div className="product__price">Rs 12,789.96</div>
+                  <h1 className="product__title">{product.title}</h1>
+                  <div className="product__price">Rs {product.price}</div>
                   <p className="product__tax">MRP inclusive of all taxes.</p>
                 </div>
                 <div className="product__variants">
@@ -119,12 +191,12 @@ const ProductDetail = () => {
                       className="product__increase--quantity quantity-button"
                       onClick={() => setValue(value + 1)}
                     >
-                      <i class="ri-add-line"></i>
+                      <i className="ri-add-line"></i>
                     </span>
                   </div>
                 </div>
 
-                <Link to="#">
+                <Link to="/cart">
                   <Button btnTitle="Add to cart" display="block" />
                 </Link>
                 <div className="product__description--section">
@@ -173,9 +245,43 @@ const ProductDetail = () => {
                     </div>
                   </div>
                 </div>
+                <div className="product__tabs">
+                  <Accordion>
+                    <Accordion.Item eventKey="0">
+                      <Accordion.Header>Manufacturer Info</Accordion.Header>
+                      <Accordion.Body>
+                        NEEDLEDUST Pvt Ltd, Plot Number- 574, Sector-43, Golf
+                        Course Road, Gurgaon- 122002, Haryana, India
+                      </Accordion.Body>
+                    </Accordion.Item>
+                    <Accordion.Item eventKey="1">
+                      <Accordion.Header>PACKAGING</Accordion.Header>
+                      <Accordion.Body>
+                        All our pairs come in beautiful hard cover boxes
+                        carefully wrapped in butter paper. Along with your
+                        pairs, the box contains a care card and a dust bag too.
+                        They make beautiful gifts too! You can also add a
+                        greeting card to your box, at the time of check out.
+                      </Accordion.Body>
+                    </Accordion.Item>
+                  </Accordion>
+                </div>
               </div>
             </Col>
           </Row>
+        </div>
+
+        <div className="product-recommendation">
+          <Title
+            title="You may also like"
+            textAlign="center"
+            paddingBottom="2rem"
+          />
+          <div className="product__list">
+            {recommendationProducts.map((product, index) => (
+              <ProductCard data={product} key={index} />
+            ))}
+          </div>
         </div>
       </Container>
     </>

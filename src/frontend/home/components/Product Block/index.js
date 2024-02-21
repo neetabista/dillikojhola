@@ -1,7 +1,8 @@
 import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import Button from "../../../../components/common/buttton";
-import { products } from "../../../../data/data";
+import { productBlock } from "../../../../data/data";
+import { Link } from "react-router-dom";
 
 const ProductBlock = ({ order, btnTitle }) => {
   return (
@@ -12,31 +13,63 @@ const ProductBlock = ({ order, btnTitle }) => {
             {order ? (
               <Col lg={6} style={{ order: "2" }}>
                 <div className="product__images right">
-                  <img className="image" src={products.image1} alt="image" />
-                  <img className="image" src={products.image2} alt="image" />
-                  <img className="image" src={products.image3} alt="image" />
-                  <img className="image" src={products.image4} alt="image" />
+                  <img
+                    className="image"
+                    src={productBlock.image1}
+                    alt="image"
+                  />
+                  <img
+                    className="image"
+                    src={productBlock.image2}
+                    alt="image"
+                  />
+                  <img
+                    className="image"
+                    src={productBlock.image3}
+                    alt="image"
+                  />
+                  <img
+                    className="image"
+                    src={productBlock.image4}
+                    alt="image"
+                  />
                 </div>
               </Col>
             ) : (
               <Col lg={6}>
                 <div className="product__images">
-                  <img className="image" src={products.image1} alt="image" />
-                  <img className="image" src={products.image2} alt="image" />
-                  <img className="image" src={products.image3} alt="image" />
-                  <img className="image" src={products.image4} alt="image" />
+                  <img
+                    className="image"
+                    src={productBlock.image1}
+                    alt="image"
+                  />
+                  <img
+                    className="image"
+                    src={productBlock.image2}
+                    alt="image"
+                  />
+                  <img
+                    className="image"
+                    src={productBlock.image3}
+                    alt="image"
+                  />
+                  <img
+                    className="image"
+                    src={productBlock.image4}
+                    alt="image"
+                  />
                 </div>
               </Col>
             )}
 
             <Col lg={6}>
               <div className="product__content">
-                <h2 className="title">{products.title}</h2>
-                <p className="product__text">{products.summary}</p>
+                <h2 className="title">{productBlock.title}</h2>
+                <p className="product__text">{productBlock.summary}</p>
 
-                <a href="#">
+                <Link href="#">
                   <Button btnTitle={btnTitle} />
-                </a>
+                </Link>
               </div>
             </Col>
           </Row>

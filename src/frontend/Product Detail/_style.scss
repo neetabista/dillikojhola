@@ -3,17 +3,18 @@
   .product__thumbnails {
     position: sticky;
     top: 60px;
+    @media (max-width: 992px) {
+      display: none;
+    }
     .product__side--nav-image {
       display: inline-block;
       cursor: pointer;
       margin-bottom: 1rem;
       transition: all 0.4 ease;
+
       &.active {
-        border: 1px solid $primary-color;
+        border: 1px solid #ccc;
       }
-      //   &:hover {
-      //     border: 1px solid $primary-color;
-      //   }
 
       img {
         max-width: 100%;
@@ -23,16 +24,24 @@
     }
   }
   .product__gallery--stack {
+    @media (max-width: 992px) {
+      display: none;
+    }
     .product__gallery--image {
       max-width: 100%;
       height: auto;
       object-fit: cover;
+      margin-bottom: 1.5rem;
     }
   }
 
   .product__info {
     color: $text-color;
-    position: relative;
+    position: sticky;
+    top: -80%;
+    @media (max-width: 992px) {
+      margin-top: 2rem;
+    }
 
     .product__meta {
       color: $primary-color;
@@ -116,8 +125,7 @@
       margin-top: 2rem;
       font-size: 14px;
       line-height: 24px;
-      position: sticky;
-      top: 60px;
+
       .shipping {
         border-top: 1px solid #ccc;
         border-bottom: 1px solid #ccc;
@@ -135,35 +143,70 @@
           .product__share--item {
             color: #ccc;
             margin-right: 1rem;
+            font-size: 18px;
+            transition: all 0.3s ease;
+            &:hover {
+              color: $primary-color;
+            }
           }
         }
       }
     }
+    .product__tabs {
+      display: none;
+      @media (max-width: 992px) {
+        display: block;
+      }
+    }
   }
-  .accordion {
-    margin-top: 2rem;
+  .product__tabs {
+    @media (max-width: 992px) {
+      display: none;
+    }
+    .accordion {
+      margin-top: 2rem;
 
-    .accordion-item {
-      border-left: none;
-      border-right: none;
+      .accordion-item {
+        border-left: none;
+        border-right: none;
 
-      .accordion-body {
-        color: $primary-color;
-        font-size: 14px;
-      }
-      .accordion-button {
-        font-size: 14px;
-        text-transform: uppercase;
-        color: $text-color;
-      }
-      .accordion-button:not(.collapsed) {
-        background-color: transparent;
-      }
+        .accordion-body {
+          color: $primary-color;
+          font-size: 14px;
+        }
+        .accordion-button {
+          font-size: 14px;
+          text-transform: uppercase;
+          color: $text-color;
+        }
+        .accordion-button:not(.collapsed) {
+          background-color: transparent;
+        }
 
-      .accordion-button:focus {
-        box-shadow: none;
-        border-color: none;
+        .accordion-button:focus {
+          box-shadow: none;
+          border-color: none;
+        }
       }
+    }
+  }
+  .swiper-product {
+    display: none;
+    @media (max-width: 992px) {
+      display: block;
+    }
+    .swiper-slide {
+      img {
+        max-width: 100%;
+        height: auto;
+        object-fit: cover;
+      }
+    }
+    .swiper-button-next {
+      color: $primary-color;
+    }
+    .swiper-button-prev {
+      color: $primary-color;
     }
   }
 }

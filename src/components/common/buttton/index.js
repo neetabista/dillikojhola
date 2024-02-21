@@ -1,9 +1,9 @@
 import React from "react";
 
-const Button = ({ btnTitle, display }) => {
+const Button = ({ btnTitle, display, marginTop }) => {
   return (
     <>
-      <div className="button" style={{ display }}>
+      <div className="button" style={{ display, marginTop }}>
         {btnTitle}
       </div>
     </>

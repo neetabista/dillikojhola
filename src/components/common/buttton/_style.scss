@@ -1,5 +1,4 @@
 .button {
-  background-color: $primary-color;
   font-size: 13px;
   text-transform: uppercase;
   display: inline-block;
@@ -8,4 +7,28 @@
   letter-spacing: 2px;
   margin-top: 2rem;
   text-align: center;
+  border: 1px solid $primary-color;
+  position: relative;
+  transition: all 0.3s linear;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: $primary-color;
+    z-index: -1;
+    transition: all 0.3s linear;
+    transform: scaleX(1);
+    transform-origin: right;
+  }
+  &:hover {
+    color: $primary-color;
+
+    &::before {
+      transform: scaleX(0);
+    }
+  }
 }

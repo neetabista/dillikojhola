@@ -1,9 +1,16 @@
 import React from "react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { removeFromCart } from "../../data/data";
 
 const CartItem = ({ item }) => {
   const [value, setValue] = useState(1);
+
+  const handleRemoveFromCart = (index) => {
+    removeFromCart(index);
+
+    window.location.reload();
+  };
 
   return (
     <>
@@ -39,7 +46,10 @@ const CartItem = ({ item }) => {
         </div>
         <div className="cart__line--price">
           <span className="price">Rs13,910.53</span>
-          <div className="cart__remove">
+          <div
+            className="cart__remove"
+            onClick={() => handleRemoveFromCart(item.index)}
+          >
             <i className="ri-close-line"></i>
           </div>
         </div>

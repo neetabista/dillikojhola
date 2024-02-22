@@ -594,7 +594,9 @@ let cartItems = [];
 export const addToCart = (product) => {
   cartItems = [...cartItems, product];
 };
-
+export const removeFromCart = (index) => {
+  cartItems = cartItems.filter((item, i) => i !== index);
+};
 export const getCartItems = () => {
   return cartItems;
 };

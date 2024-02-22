@@ -16,6 +16,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { products } from "../../data/data";
+import { addToCart } from "../../data/data";
 
 // Import Swiper styles
 import "swiper/css";
@@ -196,7 +197,17 @@ const ProductDetail = () => {
                   </div>
                 </div>
 
-                <Link to="/cart">
+                <Link
+                  to="/cart-page"
+                  onClick={() =>
+                    addToCart({
+                      id: product.id,
+                      title: product.title,
+                      price: product.price,
+                      image: product.images[0].image,
+                    })
+                  }
+                >
                   <Button btnTitle="Add to cart" display="block" />
                 </Link>
                 <div className="product__description--section">

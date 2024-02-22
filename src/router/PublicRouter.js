@@ -2,8 +2,8 @@ import React from "react";
 import { Routes, Route } from "react-router-dom";
 import Home from "../frontend/home";
 import ProductDetail from "../frontend/Product Detail";
-import Cart from "../frontend/Cart";
 import Checkout from "../frontend/checkout";
+import CartPage from "../frontend/Cart Page";
 
 const PublicRouter = () => {
   return (
@@ -14,7 +14,7 @@ const PublicRouter = () => {
           path="/product-detail/:currentSlug"
           element={<ProductDetail />}
         />
-        <Route path="/cart" element={<Cart />} />
+        <Route path="/cart-page" element={<CartPage />} />
         <Route path="/checkout" element={<Checkout />} />
       </Routes>
     </>

@@ -589,3 +589,12 @@ export const products = [
     ],
   },
 ];
+
+let cartItems = [];
+export const addToCart = (product) => {
+  cartItems = [...cartItems, product];
+};
+
+export const getCartItems = () => {
+  return cartItems;
+};

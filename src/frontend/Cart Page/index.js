@@ -3,9 +3,12 @@ import { Container } from "react-bootstrap";
 import Title from "../../components/common/Title/title";
 import { Link } from "react-router-dom";
 import Button from "../../components/common/buttton";
+import CartItem from "../../components/Cart Item";
+import { getCartItems } from "../../data/data";
 
-const Cart = () => {
-  const [value, setValue] = useState(1);
+const CartPage = () => {
+  const cartItems = getCartItems();
+
   return (
     <>
       <Container>
@@ -20,43 +23,9 @@ const Cart = () => {
                 <span className="cart__heading">Quantity</span>
                 <span className="cart__heading">Total</span>
               </div>
-              <div className="cart__item">
-                <div className="cart__image">
-                  <img src="/images/product-img-2.jpg" alt="image" />
-                </div>
-                <div className="cart__info">
-                  <h2 className="cart__title">
-                    <Link to="#">LADIES HAND BAG</Link>
-                  </h2>
-                  <div className="cart__meta">
-                    <div className="cart__variant">36</div>
-                    <div className="cart__price">Rs13,910.53</div>
-                  </div>
-                </div>
-                <div className="cart__actions">
-                  <div className="cart__quantity--selector">
-                    <span
-                      className="product__decrease--quantity quantity-button"
-                      onClick={() => setValue(value > 1 ? value - 1 : value)}
-                    >
-                      <i className="ri-subtract-line"></i>
-                    </span>
-                    <input type="text" value={value} />
-                    <span
-                      className="product__increase--quantity quantity-button"
-                      onClick={() => setValue(value + 1)}
-                    >
-                      <i className="ri-add-line"></i>
-                    </span>
-                  </div>
-                </div>
-                <div className="cart__line--price">
-                  <span className="price">Rs13,910.53</span>
-                  <div className="cart__remove">
-                    <i className="ri-close-line"></i>
-                  </div>
-                </div>
-              </div>
+              {cartItems.map((item, index) => (
+                <CartItem item={item} key={index} />
+              ))}
             </div>
             <div className="cart__footer">
               <div className="cart__note--container">
@@ -93,4 +62,4 @@ const Cart = () => {
   );
 };
 
-export default Cart;
+export default CartPage;

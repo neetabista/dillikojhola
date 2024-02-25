@@ -1,5 +1,6 @@
 import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
@@ -12,15 +13,15 @@ const Footer = () => {
                 <div className="footer__block">
                   <h4 className="footer__title">STOCKISTS & EVENTS</h4>
                   <ul className="footer__list">
-                    <a href="#">
-                      <li className="footer__item">Events & Exhibitions</li>
-                    </a>
-                    <a href="#">
-                      <li className="footer__item">Stockists</li>
-                    </a>
-                    <a href="#">
-                      <li className="footer__item">Brand Partnerships</li>
-                    </a>
+                    <li className="footer__item">
+                      <Link to="#">Events & Exhibitions</Link>
+                    </li>
+                    <li className="footer__item">
+                      <Link to="#">Stockists</Link>
+                    </li>
+                    <li className="footer__item">
+                      <Link to="#">Brand Partnerships</Link>
+                    </li>
                   </ul>
                 </div>
               </Col>
@@ -29,18 +30,18 @@ const Footer = () => {
                 <div className="footer__block">
                   <h4 className="footer__title">SHOPPING SUPPORT</h4>
                   <ul className="footer__list">
-                    <a href="#">
-                      <li className="footer__item">FAQ</li>
-                    </a>
-                    <a href="#">
-                      <li className="footer__item">Exchanges & Returns</li>
-                    </a>
-                    <a href="#">
-                      <li className="footer__item">Refund Policy</li>
-                    </a>
-                    <a href="#">
-                      <li className="footer__item">Events & Exhibitions</li>
-                    </a>
+                    <li className="footer__item">
+                      <Link to="#">FAQ</Link>
+                    </li>
+                    <li className="footer__item">
+                      <Link to="#">Exchanges & Returns</Link>
+                    </li>
+                    <li className="footer__item">
+                      <Link to="#">Refund Policy</Link>
+                    </li>
+                    <li className="footer__item">
+                      <Link to="#">Events & Exhibitions</Link>
+                    </li>
                   </ul>
                 </div>
               </Col>
@@ -69,9 +70,9 @@ const Footer = () => {
                         id="email"
                         placeholder="Enter email here"
                       />
-                      <a href="#">
+                      <Link to="#">
                         <i className="ri-arrow-right-line"></i>
-                      </a>
+                      </Link>
                     </div>
                   </form>
 
@@ -84,12 +85,12 @@ const Footer = () => {
                     FOLLOW US FOR UPDATES & LATEST DEALS
                   </h4>
                   <div className="footer__social--icons">
-                    <a href="#" className="icon">
+                    <Link href="#" className="icon">
                       <i className="ri-facebook-fill"></i>
-                    </a>
-                    <a href="#" className="icon">
+                    </Link>
+                    <Link href="#" className="icon">
                       <i className="ri-instagram-line"></i>
-                    </a>
+                    </Link>
                   </div>
                 </div>
               </Col>

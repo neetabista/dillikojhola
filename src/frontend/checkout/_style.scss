@@ -165,4 +165,17 @@
       }
     }
   }
+  pre {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .success {
+      background-color: $primary-color;
+      color: $white-color;
+      padding: 1rem 1rem;
+      text-align: center;
+      width: 50%;
+    }
+  }
 }
